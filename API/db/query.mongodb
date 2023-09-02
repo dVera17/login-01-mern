@@ -1,0 +1,19 @@
+use('db_login_test');
+db.createCollection("user", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["user", "password_user"],
+            properties: {
+                user: { bsonType: "string", description: "username is required" },
+                password_user: { bsonType: "string", description: "password is required" }
+            }
+        }
+    }
+})
+
+use('db_login_test');
+db.user.insertOne({
+    user: "santi",
+    password_user: "123"
+})
